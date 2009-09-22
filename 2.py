@@ -4,3 +4,11 @@
 # 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ...
 # 
 # Find the sum of all the even-valued terms in the sequence which do not exceed four million.
+kept_terms = []
+prev_term, current_term = 0, 1
+
+while current_term <= 4000000:
+  prev_term, current_term = current_term, prev_term + current_term
+  if current_term%2 == 0:
+    kept_terms.append(current_term)
+print sum(kept_terms)
