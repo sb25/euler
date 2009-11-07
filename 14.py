@@ -11,3 +11,24 @@
 # Which starting number, under one million, produces the longest chain?
 # 
 # NOTE: Once the chain starts the terms are allowed to go above one million.
+global chain_length
+chain_length = { 1 : 1 }
+
+def get_length(nb):
+  if nb in chain_length:
+    return chain_length[nb]
+    
+  if nb%2 == 0:
+    chain_length[nb] = 1 + get_length(nb / 2)
+  else:
+    chain_length[nb] = 1 + get_length(3*nb + 1)
+  return chain_length[nb]
+
+for i in range(1,1000000):
+  get_length(i)
+
+longest_chain = max(chain_length.values())
+for key, value in chain_length.items():
+  if value == longest_chain:
+    print key
+    break
